@@ -41,7 +41,7 @@ def writehistory(text):
         f.write('\n')
     f.close()
 # Set HF API tokenyourHFtoken = "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"#here your HF token
-repo="HuggingFaceH4/starchat-beta"
+#repo="HuggingFaceH4/starchat-beta"
 ### START STREAMLIT UI
 st.title("🤗 HuggingFace Free ChatBot")
 st.subheader("using Starchat-beta")
