@@ -3,10 +3,12 @@ from huggingface_hub import InferenceClient
 from langchain import HuggingFaceHub
 import requests# Internal usage
 import os
+from dotenv import load_dotenv
 from time import sleep
 
-yourHFtoken = "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" #here your HF token
-#repo="HuggingFaceH4/starchat-beta"
+load_dotenv()
+yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+repo="HuggingFaceH4/starchat-beta"
 
 #AVATARS
 av_us = './man.png' #"🦖" #A single emoji, e.g. "🧑 💻", "🤖", "🦖". Shortco
@@ -20,8 +22,8 @@ def starchat(model,myprompt, your_template):
     from langchain import PromptTemplate, LLMChain
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
     llm = HuggingFaceHub(repo_id=model,
-                         model_kwargs={"min_length":30,
-                                       "max_new_tokens":256, "do_sample":True,
+                         model_kwargs={"min_length":100,
+                                       "max_new_tokens":1024, "do_sample":True,
                                        "temperature":0.2,
                                        "top_k":50,
                                        "top_p":0.95, "eos_token_id":49155})
