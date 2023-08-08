@@ -1,4 +1,9 @@
 streamlit
 huggingface_hub
 langchain
-#time
+Requests
+
+#huggingface_hub==0.16.4
+#langchain==0.0.257
+#Requests==2.31.0
+#streamlit==1.25.0
