@@ -8,6 +8,7 @@ from time import sleep
 
 load_dotenv()
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+repo="HuggingFaceH4/starchat-beta"
 
 #AVATARS
 av_us = './man.png' #"🦖" #A single emoji, e.g. "🧑 💻", "🤖", "🦖". Shortco
@@ -41,7 +42,7 @@ def writehistory(text):
         f.write('\n')
     f.close()
 # Set HF API tokenyourHFtoken = "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"#here your HF token
-repo="HuggingFaceH4/starchat-beta"
+#repo="HuggingFaceH4/starchat-beta"
 ### START STREAMLIT UI
 st.title("🤗 HuggingFace Free ChatBot")
 st.subheader("using Starchat-beta")
