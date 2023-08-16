@@ -3,6 +3,7 @@ huggingface_hub
 langchain
 Requests
 python-dotenv
+altair
 
 #huggingface_hub==0.16.4
 #langchain==0.0.257
