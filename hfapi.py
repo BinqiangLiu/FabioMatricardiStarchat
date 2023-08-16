@@ -26,8 +26,10 @@ yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo="HuggingFaceH4/starchat-beta"
 
 #AVATARS
-av_us = './man.png' #"🦖" #A single emoji, e.g. "🧑 💻", "🤖", "🦖". Shortco
-av_ass = './robot.png'
+#av_us = './man.png' #"🦖" #A single emoji, e.g. "🧑 💻", "🤖", "🦖". Shortco
+#av_ass = './robot.png'
+av_us = '🧑'
+av_ass = '🤖'
 # Set a default model
 if "hf_model" not in st.session_state:
     st.session_state["hf_model"] = "HuggingFaceH4/starchat-beta"
@@ -75,7 +77,7 @@ for message in st.session_state.messages:
            st.markdown(message["content"])
 
 # Accept user input
-if myprompt := st.chat_input("What is an AI model?"):
+if myprompt := st.chat_input("Enter your question here."):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": myprompt})
     # Display user message in chat message container
