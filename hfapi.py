@@ -22,6 +22,7 @@ with open(css_file) as f:
     st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 load_dotenv()
+yourHFtoken = "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"
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo="HuggingFaceH4/starchat-beta"
 
@@ -88,18 +89,18 @@ if myprompt := st.chat_input("Enter your question here."):
         writehistory(usertext)
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = ""
-        res = starchat(
-              st.session_state["hf_model"],
-              myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
-        response = res.split(" ")
-        for r in response:
-            full_response = full_response + r + " "
-            message_placeholder.markdown(full_response + "▌")
-            sleep(0.1)
-        message_placeholder.markdown(full_response)
-        asstext = f"assistant: {full_response}"
-        writehistory(asstext) 
-        st.session_state.messages.append({"role": "assistant", "content": full_response})
-#streamlit run stapp.py
+        with st.spinner("AI Thinking..."):
+            message_placeholder = st.empty()
+            full_response = ""
+            res = starchat(
+                  st.session_state["hf_model"],
+                  myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
+            response = res.split(" ")
+            for r in response:
+                full_response = full_response + r + " "
+                message_placeholder.markdown(full_response + "▌")
+                sleep(0.1)
+            message_placeholder.markdown(full_response)
+            asstext = f"assistant: {full_response}"
+            writehistory(asstext) 
+            st.session_state.messages.append({"role": "assistant", "content": full_response})
