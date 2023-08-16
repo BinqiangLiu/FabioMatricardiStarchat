@@ -1,6 +1,6 @@
 from pathlib import Path
 import streamlit as st
-from streamlit_chat import message
+#from streamlit_chat import message
 from huggingface_hub import InferenceClient
 from langchain import HuggingFaceHub
 import requests# Internal usage
@@ -14,8 +14,6 @@ from time import sleep
 
 st.set_page_config(page_title="AI Chatbot 100% Free")
 st.write('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
-#st.title('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
-#st.write('🤗💬Absolute Free & Opensouce AI Chatbot: HugChat - DataProf & chatMATE/VishnuSivan')
 
 # --- PATH SETTINGS ---
 css_file = "main.css"
