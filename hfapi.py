@@ -1,10 +1,27 @@
+from pathlib import Path
 import streamlit as st
+from streamlit_chat import message
 from huggingface_hub import InferenceClient
 from langchain import HuggingFaceHub
 import requests# Internal usage
 import os
 from dotenv import load_dotenv
 from time import sleep
+#from hugchat import hugchat
+#from hugchat.login import Login
+#from streamlit_extras.colored_header import colored_header
+#from streamlit_extras.add_vertical_space import add_vertical_space
+
+st.set_page_config(page_title="AI Chatbot 100% Free")
+st.write('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
+#st.title('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
+#st.write('🤗💬Absolute Free & Opensouce AI Chatbot: HugChat - DataProf & chatMATE/VishnuSivan')
+
+# --- PATH SETTINGS ---
+css_file = "main.css"
+# --- LOAD CSS, PDF & PROFIL PIC ---
+with open(css_file) as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
 
 load_dotenv()
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
@@ -20,7 +37,6 @@ if "hf_model" not in st.session_state:
 ### INITIALIZING STARCHAT FUNCTION MODEL
 def starchat(model,myprompt, your_template):
     from langchain import PromptTemplate, LLMChain
-#    yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
     llm = HuggingFaceHub(repo_id=model,
                          model_kwargs={"min_length":100,
@@ -41,8 +57,7 @@ def writehistory(text):
         f.write(text)
         f.write('\n')
     f.close()
-# Set HF API tokenyourHFtoken = "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"#here your HF token
-#repo="HuggingFaceH4/starchat-beta"
+
 ### START STREAMLIT UI
 st.title("🤗 HuggingFace Free ChatBot")
 st.subheader("using Starchat-beta")
