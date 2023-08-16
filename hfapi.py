@@ -57,8 +57,8 @@ def writehistory(text):
     f.close()
 
 ### START STREAMLIT UI
-st.title("🤗 HuggingFace Free ChatBot")
-st.subheader("using Starchat-beta")
+#st.title("🤗 HuggingFace Free ChatBot")
+#st.subheader("using Starchat-beta")
 
 # Initialize chat history
 if "messages" not in st.session_state:
