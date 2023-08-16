@@ -9,3 +9,5 @@ altair
 #langchain==0.0.257
 #Requests==2.31.0
 #streamlit==1.25.0
+#https://artificialcorner.com/say-goodbye-to-openai-create-a-chatbot-thats-truly-your-own-superpower-part-1-f534d65b4940
+#https://github.com/fabiomatricardi/HFChatbot
