@@ -1,4 +1,4 @@
-#Memory in prompt.
+#Memory in prompt.将过往的对话历史文本内容提取出来并追加累积，然后放入myprompt中作为用户输入的问题（还有一些小的处理，增加一些固定的文字说明）
 from pathlib import Path
 import streamlit as st
 #from streamlit_chat import message
@@ -55,13 +55,17 @@ def starchat(model,myprompt, your_template):
     AI Response:
     """
 #以上是新增内容    
-    template = my_prompt_template
-#    template = your_template
-    prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
-#    prompt = PromptTemplate(template=template, input_variables=["myprompt"])
+#    template = my_prompt_template
+    template = your_template
+#    prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
+    prompt = PromptTemplate(template=template, input_variables=["myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
-#    llm_reply = llm_chain.run(myprompt)
-    llm_reply = llm_chain.run({'contexts': contexts, 'myprompt': myprompt})    
+    add_notes_1="Beginning of chat history:\n"
+    add_notes_2="End of chat history:\n"
+    add_notes_3="Please consult the above chat history before responding to the user question below. User question:\n"
+    myprompt=add_notes_1+contents+add_notes_2+add_notes_3+myprompt
+    llm_reply = llm_chain.run(myprompt)
+    #llm_reply = llm_chain.run({'contexts': contexts, 'myprompt': myprompt})    
     reply = llm_reply.partition('<|end|>')[0]
     return reply
 
