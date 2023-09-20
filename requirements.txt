@@ -5,6 +5,7 @@ Requests
 python-dotenv
 altair
 streamlit_chat
+streamlit_extras
 
 #huggingface_hub==0.16.4
 #langchain==0.0.257
