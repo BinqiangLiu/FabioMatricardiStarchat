@@ -63,7 +63,7 @@ def starchat(model,myprompt, your_template):
     add_notes_1="Beginning of chat history:\n"
     add_notes_2="End of chat history:\n"
     add_notes_3="Please consult the above chat history before responding to the user question below. User question:\n"
-    myprompt=add_notes_1+contents+add_notes_2+add_notes_3+myprompt
+    myprompt=add_notes_1+contexts+add_notes_2+add_notes_3+myprompt
     llm_reply = llm_chain.run(myprompt)
     #llm_reply = llm_chain.run({'contexts': contexts, 'myprompt': myprompt})    
     reply = llm_reply.partition('<|end|>')[0]
