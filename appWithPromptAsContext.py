@@ -46,8 +46,8 @@ def starchat(model,myprompt, your_template):
                                        "top_k":50,
                                        "top_p":0.95, "eos_token_id":49155})
 #以下是新增内容
-    my_prompt_template = """You are a very helpful AI assistant. You are provided {contexts} as chat history between user and you. For any following question, you MUST consider 
-    the chat history and response to {myprompt} as the user question. Only output your response!    
+    my_prompt_template = """You are a very smart and helpful AI assistant. You are provided {contexts} as chat history between user and you. For any following question, you MUST consider 
+    the chat history and response to {myprompt} as the user question. However, this should not interrupt any of your normal response actions that you would take even without the chat history. Only output your response!    
     AI Repsonse:
     """
 #以上是新增内容    
