@@ -1,7 +1,7 @@
 #Memory in prompt.将过往的对话历史文本内容提取出来并追加累积，然后放入myprompt中作为用户输入的问题（还有一些小的处理，增加一些固定的文字说明）
 from pathlib import Path
 import streamlit as st
-#from streamlit_chat import message
+from streamlit_chat import message
 from huggingface_hub import InferenceClient
 from langchain import HuggingFaceHub
 import requests# Internal usage
@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 from time import sleep
 #from hugchat import hugchat
 #from hugchat.login import Login
-#from streamlit_extras.colored_header import colored_header
-#from streamlit_extras.add_vertical_space import add_vertical_space
+from streamlit_extras.colored_header import colored_header
+from streamlit_extras.add_vertical_space import add_vertical_space
 
 st.set_page_config(page_title="AI Chatbot 100% Free", layout="wide")
 st.write('完全开源免费的AI智能聊天助手 | Absolute Free & Opensouce AI Chatbot')
@@ -25,7 +25,7 @@ with open(css_file) as f:
 load_dotenv()
 yourHFtoken = "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"
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
-repo="HuggingFaceH4/starchat-beta"
+repo_id="HuggingFaceH4/starchat-beta"
 
 #AVATARS
 #av_us = './man.png' #"🦖" #A single emoji, e.g. "🧑 💻", "🤖", "🦖". Shortco
@@ -40,20 +40,20 @@ if "hf_model" not in st.session_state:
 def starchat(model,myprompt, your_template):
     from langchain import PromptTemplate, LLMChain
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
-    llm = HuggingFaceHub(repo_id=model,
+    llm = HuggingFaceHub(repo_id=repo_id,
                          model_kwargs={"min_length":100,
                                        "max_new_tokens":1024, "do_sample":True,
                                        "temperature":0.1,
                                        "top_k":50,
                                        "top_p":0.95, "eos_token_id":49155})
 #以下是新增内容
-    my_prompt_template = """You are a very smart and helpful AI assistant. You are provided {contexts} as chat history between the user and you.
-    For any following question, you MUST consider the chat history and response to {myprompt} as the user question. 
-    However, you SHOULD NOT limit your reponse to the chat history.
-    You should take any actions you would take when you response to a user question normally.
-    DO NOT OUTPUT the chat history or the user question or ANY other unrelated information!
-    AI Response:
-    """
+#    my_prompt_template = """You are a very smart and helpful AI assistant. You are provided {contexts} as chat history between the user and you.
+#    For any following question, you MUST consider the chat history and response to {myprompt} as the user question. 
+#    However, you SHOULD NOT limit your reponse to the chat history.
+#    You should take any actions you would take when you response to a user question normally.
+#    DO NOT OUTPUT the chat history or the user question or ANY other unrelated information!
+#    AI Response:
+#    """
 #以上是新增内容    
 #    template = my_prompt_template
     template = your_template
