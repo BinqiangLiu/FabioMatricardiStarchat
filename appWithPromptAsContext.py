@@ -60,13 +60,14 @@ def starchat(model,myprompt, your_template):
 #    prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
     prompt = PromptTemplate(template=template, input_variables=["myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
-    add_notes_1="Beginning of chat history:\n"
-    add_notes_2="End of chat history:\n"
-    add_notes_3="Please consult the above chat history before responding to the user question below. User question:\n"    
+    add_notes_1="Beginning of chat history:"
+    add_notes_2="End of chat history."
+    add_notes_3="Please consult the above chat history before responding to the user question below."
+    add_notes_4="User question: "    
     st.write(myprompt)
     st.write("---")
     #myprompt=add_notes_1+contexts+add_notes_2+add_notes_3+myprompt
-    myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + myprompt
+    myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n"+ add_notes_4 + "\n" + myprompt
 #似乎能够运行不出错，但是运行速度很慢？！更重要的是，好像还是不能够将以前的对话历史纳入！
     st.write(myprompt)
     llm_reply = llm_chain.run(myprompt)
