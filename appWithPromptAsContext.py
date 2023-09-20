@@ -45,8 +45,15 @@ def starchat(model,myprompt, your_template):
                                        "temperature":0.1,
                                        "top_k":50,
                                        "top_p":0.95, "eos_token_id":49155})
-    template = your_template
-    prompt = PromptTemplate(template=template, input_variables=["myprompt"])
+    my_prompt_template = """You are a very helpful AI assistant. Please response to the user's input question with as many details as possible.
+    However, if you really don't know the answer, just say that you don't know. DON'T try to make up an answer becauase hallicunation is NO GOOD :)
+    Please NOTE, you MUST refer to the chat history as contexts before making your final response!
+    Contexts: {contexts}
+    Question: {myprompt}
+    Helpful AI Repsonse:
+    """
+    template = my_prompt_template
+    prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
     llm_reply = llm_chain.run(myprompt)
     reply = llm_reply.partition('<|end|>')[0]
@@ -57,6 +64,8 @@ def writehistory(text):
     with open('chathistory.txt', 'a') as f:
         f.write(text)
         f.write('\n')
+#增加下面一行代码，读取对话记录text并存储到contexts
+        contexts = f.read()
     f.close()
 
 ### START STREAMLIT UI
