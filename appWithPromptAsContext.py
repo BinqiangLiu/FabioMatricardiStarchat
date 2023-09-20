@@ -49,8 +49,8 @@ def starchat(model,myprompt, your_template):
 #以下是新增内容
     my_prompt_template = """You are a very smart and helpful AI assistant. You are provided {contexts} as chat history between the user and you. For any following question, you MUST consider the chat history and response to {myprompt} as the user question.
     However, you SHOULD NOT limit your reponse to the chat history. In addition, you should take any actions you would take when you response to a user question normally
-    And output your RESPONSE ONLY, do NOT OUTPUT the chat history or ANY unrelated information!
-    AI Repsonse:
+    And output your RESPONSE ONLY, do NOT OUTPUT the chat history or the user question or ANY other unrelated information!
+#    AI Repsonse:
     """
 #以上是新增内容    
     template = my_prompt_template
