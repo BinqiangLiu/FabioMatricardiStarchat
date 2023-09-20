@@ -59,7 +59,8 @@ def starchat(model,myprompt, your_template):
     prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
 #    prompt = PromptTemplate(template=template, input_variables=["myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
-    llm_reply = llm_chain.run(myprompt)
+#    llm_reply = llm_chain.run(myprompt)
+    llm_reply = llm_chain.run({'contexts': contexts, 'myprompt': myprompt})    
     reply = llm_reply.partition('<|end|>')[0]
     return reply
 
