@@ -64,13 +64,21 @@ def starchat(model,myprompt, your_template):
     return reply
 
 # FUNCTION TO LOG ALL CHAT MESSAGES INTO chathistory.txt
+#def writehistory(text):
+#    with open('chathistory.txt', 'a') as f:
+#        f.write(text)
+#        f.write('\n')
+#增加下面一行代码，读取对话记录text并存储到contexts
+#        contexts = f.read()
+#    f.close()
+
 def writehistory(text):
-    with open('chathistory.txt', 'a') as f:
+    with open('chathistory.txt', 'a+') as f:
         f.write(text)
         f.write('\n')
-#增加下面一行代码，读取对话记录text并存储到contexts
+        f.seek(0)  # 将文件指针移动到文件开头
         contexts = f.read()
-    f.close()
+    return contexts
 
 ### START STREAMLIT UI
 #st.title("🤗 HuggingFace Free ChatBot")
@@ -100,6 +108,8 @@ if myprompt := st.chat_input("Enter your question here."):
         st.markdown(myprompt)
         usertext = f"user: {myprompt}"
         writehistory(usertext)
+#新增如下一行        
+        contexts = writehistory(usertext)
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):
@@ -115,5 +125,7 @@ if myprompt := st.chat_input("Enter your question here."):
                 sleep(0.1)
             message_placeholder.markdown(full_response)
             asstext = f"assistant: {full_response}"
-            writehistory(asstext) 
+            writehistory(asstext)
+#新增如下一行        
+            contexts = writehistory(asstext)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
