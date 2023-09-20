@@ -60,9 +60,9 @@ def starchat(model,myprompt, your_template):
 #    prompt = PromptTemplate(template=template, input_variables=["contexts", "myprompt"])
     prompt = PromptTemplate(template=template, input_variables=["myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
-    add_notes_1="Beginning of chat history:"
-    add_notes_2="End of chat history."
-    add_notes_3="Please consult the above chat history before responding to the user question below."
+    add_notes_1="Beginning of chat history:\n"
+    add_notes_2="End of chat history.\n"
+    add_notes_3="Please consult the above chat history before responding to the user question below.\n"
     add_notes_4="User question: "    
     st.write(myprompt)
     st.write("---")
