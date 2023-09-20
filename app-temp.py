@@ -1,4 +1,4 @@
-#Memory in prompt.
+#Memory in prompt.将过往的对话历史文本内容提取出来并追加累积，然后放入prompt中作为contexts
 from pathlib import Path
 import streamlit as st
 #from streamlit_chat import message
