@@ -40,6 +40,7 @@ if "hf_model" not in st.session_state:
 
 if "file_name" not in st.session_state:
     st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"
+    st.write("随机生成的文件名称："+st.session_state["file_name"])
 
 ### INITIALIZING STARCHAT FUNCTION MODEL
 def starchat(model, myprompt, your_template):
@@ -73,6 +74,7 @@ def starchat(model, myprompt, your_template):
 
 # FUNCTION TO LOG ALL CHAT MESSAGES INTO chathistory.txt
 def writehistory(text, file_name):
+    st.write("随机生成的文件名称："+st.session_state["file_name"])
     with open(file_name, 'a+') as f:
         f.write(text)
         f.write('\n')
