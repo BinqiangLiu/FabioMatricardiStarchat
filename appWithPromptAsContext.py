@@ -26,7 +26,7 @@ load_dotenv()
 yourHFtoken = "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"
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 repo_id="HuggingFaceH4/starchat-beta"
-
+myprompt_temp=""
 #AVATARS
 #av_us = './man.png' #"🦖" #A single emoji, e.g. "🧑 💻", "🤖", "🦖". Shortco
 #av_ass = './robot.png'
