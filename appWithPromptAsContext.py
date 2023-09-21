@@ -112,11 +112,15 @@ for message in st.session_state.messages:
    if message["role"] == "user":
 #      with st.chat_message(message["role"],avatar=av_us):
       with st.chat_message(message["role"]):
+           st.write("用户输入问题的显示开始")
            st.markdown(message["content"])
+           st.write("用户输入问题的显示结束")
    else:
 #       with st.chat_message(message["role"],avatar=av_ass):
        with st.chat_message(message["role"]):
+           st.write("assistant回复内容的显示开始")
            st.markdown(message["content"])
+           st.write("assistant回复内容的显示结束")
 
 # Accept user input
 if myprompt := st.chat_input("Enter your question here."):
