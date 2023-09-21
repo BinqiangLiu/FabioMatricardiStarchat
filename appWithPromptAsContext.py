@@ -138,6 +138,7 @@ if myprompt := st.chat_input("Enter your question here."):
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)
+            st.write("---")
             message_placeholder.markdown(full_response)
             st.write("Current User Query: "+myprompt_temp)
             st.write("---")
