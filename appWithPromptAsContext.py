@@ -97,7 +97,7 @@ def starchat(model,myprompt, your_template):
 # 生成一个随机的文件名
 if "file_name" not in st.session_state:
     st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"
-    st.write("随机生成的文件名称："+file_name)
+    st.write("随机生成的文件名称："+st.session_state["file_name"])
 
 def writehistory(text):       
     with open(st.session_state["file_name"], 'a+') as f:
