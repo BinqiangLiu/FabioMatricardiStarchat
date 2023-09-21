@@ -103,6 +103,7 @@ def writehistory(text):
         f.write('\n')
         f.seek(0)  # 将文件指针移动到文件开头
         contexts = f.read()
+        st.write("contexts的内容："+contexts)
     return contexts
 
 ### START STREAMLIT UI
@@ -138,7 +139,8 @@ if myprompt := st.chat_input("Enter your question here."):
         usertext = f"user: {myprompt}"
 #        writehistory(usertext)
 #新增如下一行        
-        contexts = writehistory(usertext)   #这里会将当前/本次的最新用户输入追加到contexts的末尾        
+        contexts = writehistory(usertext)   #这里会将当前/本次的最新用户输入追加到contexts的末尾
+        st.write("在用户当前输入问题的模块调用writehistory写入聊天历史记录的函数/方法，会打印输出文件名称，并输出此时的user-contexts内容")
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):            
@@ -159,5 +161,6 @@ if myprompt := st.chat_input("Enter your question here."):
 #            writehistory(asstext)
 #新增如下一行        
             contexts = writehistory(asstext)   #这里会将当前/本次的AI回复内容追加到contexts末尾
+            st.write("在assistant当前回复的模块调用writehistory写入聊天历史记录的函数/方法，也会打印输出文件名称，并输出此时的assitant-contexts内容")            
             #st.write("st.chat_message的assistant之contexts（这里会将当前/本次的AI回复内容追加到contexts末尾）: "+contexts)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
