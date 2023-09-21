@@ -69,12 +69,12 @@ def starchat(model,myprompt, your_template):
     #myprompt=add_notes_1+contexts+add_notes_2+add_notes_3+myprompt
     myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n"+ add_notes_4 + "\n" + myprompt
 #似乎能够运行不出错，但是运行速度很慢？！更重要的是，好像还是不能够将以前的对话历史纳入！
-    st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出开始")
-    st.write("Current User Query: "+myprompt_temp)
-    st.write("---")
-    st.write("Combined User Input as Prompt:")
-    st.write(myprompt)
-    st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出结束")
+    #st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出开始")
+    #st.write("Current User Query: "+myprompt_temp)
+    #st.write("---")
+    #st.write("Combined User Input as Prompt:")
+    #st.write(myprompt)
+    #st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出结束")
     llm_reply = llm_chain.run(myprompt)
     #llm_reply = llm_chain.run({'contexts': contexts, 'myprompt': myprompt})    
     reply = llm_reply.partition('<|end|>')[0]
@@ -148,8 +148,7 @@ if myprompt := st.chat_input("Enter your question here."):
             st.write("Combined User Input as Prompt:")
             st.write(myprompt)
             st.write("---在with st.chat_message( - assistant - )内的信息打印输出结束")
-            asstext = f"assistant: {full_response}"
-            st.write("---AI Assistant的回复信息打印输出位置---")
+            asstext = f"assistant: {full_response}"            
 #            writehistory(asstext)
 #新增如下一行        
             contexts = writehistory(asstext)
