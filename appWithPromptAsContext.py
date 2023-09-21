@@ -135,8 +135,8 @@ if myprompt := st.chat_input("Enter your question here."):
         usertext = f"user: {myprompt}"
 #        writehistory(usertext)
 #新增如下一行        
-        contexts = writehistory(usertext)
-        st.write("st.chat_message的user之contexts: "+contexts)
+        contexts = writehistory(usertext)   #这里会将当前/本次的最新用户输入追加到contexts的末尾
+        st.write("st.chat_message的user之contexts（这里会将当前/本次的最新用户输入追加到contexts的末尾）: "+contexts)
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):
@@ -155,9 +155,9 @@ if myprompt := st.chat_input("Enter your question here."):
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)            
             st.write("用st.write方法打印输出assistant的回复结果开始")
-            st.markdown("用st.markdown方法打印输出assistant的回复结果开始")
-            st.write("assistant的回复结果: "+full_response)
-            st.markdown("用st.markdown方法打印输出assistant的回复结果结束")
+            st.markdown("---用st.markdown方法打印输出assistant的本次/当前回复结果开始---")
+            st.write(full_response)
+            st.markdown("---用st.markdown方法打印输出assistant的本次/当前回复结果结束---")
             st.write("---")
             #message_placeholder.markdown(full_response)   这个是不是用来显示assistant的方法？？？
             #st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
@@ -170,6 +170,6 @@ if myprompt := st.chat_input("Enter your question here."):
             asstext = f"assistant: {full_response}"            
 #            writehistory(asstext)
 #新增如下一行        
-            contexts = writehistory(asstext)
-            st.write("st.chat_message的assistant之contexts: "+contexts)
+            contexts = writehistory(asstext)   #这里会将当前/本次的AI回复内容追加到contexts末尾
+            st.write("st.chat_message的assistant之contexts（这里会将当前/本次的AI回复内容追加到contexts末尾）: "+contexts)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
