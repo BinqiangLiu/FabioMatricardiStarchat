@@ -102,6 +102,7 @@ if myprompt := st.chat_input("Enter your question here."):
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):
+            st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置从这里开始 - 输出开始...")
             message_placeholder = st.empty()
             full_response = ""
             res = starchat(
