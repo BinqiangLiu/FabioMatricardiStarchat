@@ -51,7 +51,7 @@ def starchat(model, myprompt, your_template):
     myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + add_notes_4 + "\n" + myprompt
     st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出开始")
     st.write("Current User Query: "+myprompt_temp)
-    st.write("Combined User Input as Prompt:")
+    st.write("Combined User Input as Prompt/也就是整合了聊天记录的更新后输入（包含用户的最新输入）:")
     st.write(myprompt)
     st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出结束")    
     llm_reply = llm_chain.run(myprompt)
