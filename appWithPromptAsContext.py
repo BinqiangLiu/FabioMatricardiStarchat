@@ -129,7 +129,9 @@ if myprompt := st.chat_input("Enter your question here."):
     # Display user message in chat message container
 #    with st.chat_message("user", avatar=av_us):
     with st.chat_message("user"):
+        st.write("---用户的当前输入问题显示开始---")
         st.markdown(myprompt)
+        st.write("---用户的当前输入问题显示结束---")
         usertext = f"user: {myprompt}"
 #        writehistory(usertext)
 #新增如下一行        
