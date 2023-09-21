@@ -112,14 +112,12 @@ for message in st.session_state.messages:
    if message["role"] == "user":
 #      with st.chat_message(message["role"],avatar=av_us):
       with st.chat_message(message["role"]):
-           st.write("这里是用户输入的历史信息显示")
-           st.markdown("这里是用户输入的历史信息显示")
+           st.write("这里是用户输入的历史信息显示")           
            st.markdown(message["content"])           
    else:
 #       with st.chat_message(message["role"],avatar=av_ass):
        with st.chat_message(message["role"]):
-           st.write("这里是assistant回复的历史信息显示")
-           st.markdown("这里是assistant回复的历史信息显示")
+           st.write("这里是assistant回复的历史信息显示")           
            st.markdown(message["content"])           
 
 # Accept user input
@@ -135,40 +133,25 @@ if myprompt := st.chat_input("Enter your question here."):
         usertext = f"user: {myprompt}"
 #        writehistory(usertext)
 #新增如下一行        
-        contexts = writehistory(usertext)   #这里会将当前/本次的最新用户输入追加到contexts的末尾
-        st.write("st.chat_message的user之contexts（这里会将当前/本次的最新用户输入追加到contexts的末尾）: "+contexts)
+        contexts = writehistory(usertext)   #这里会将当前/本次的最新用户输入追加到contexts的末尾        
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
-        with st.spinner("AI Thinking..."):
-            st.write("---assistant的当前回复结果输出开始---")
-            st.markdown("---assistant的当前回复结果markdown输出开始---")
+        with st.spinner("AI Thinking..."):            
             st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出开始---")
             message_placeholder = st.empty()   #这里是assistant的本次/当前回复结果显示位置
             full_response = ""
             res = starchat(
                   st.session_state["hf_model"],
                   myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
-            response = res.split(" ")
-            st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出结束---")
+            response = res.split(" ")            
             st.write("---assistant的回复结果输出结束---")
             st.markdown("---assistant的回复结果markdown输出结束---")
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)                        
-            st.write("用st.write方法打印输出assistant的回复结果开始")
-            st.markdown("---用st.markdown方法打印输出assistant的本次/当前回复结果开始---")
-            st.write(full_response)
-            st.markdown("---用st.markdown方法打印输出assistant的本次/当前回复结果结束---")
-            st.write("---")
-            #message_placeholder.markdown(full_response)   这个是不是用来显示assistant的方法？？？
-            #st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
-            #st.write("Current User Query: "+myprompt_temp)
-            #st.write("---")
-            #st.write("Combined User Input as Prompt:")
-            #st.write(myprompt)
-            #在这里，变量myprompt_temp、myprompt都会被重置为空置
-            #st.write("---在with st.chat_message( - assistant - )内的信息打印输出结束") - 位置不对
+            st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出结束---")            
+            message_placeholder.markdown(full_response)   #这个是不是用来显示assistant的方法？？？
             asstext = f"assistant: {full_response}"            
 #            writehistory(asstext)
 #新增如下一行        
