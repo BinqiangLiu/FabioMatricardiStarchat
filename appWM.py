@@ -49,6 +49,12 @@ def starchat(model, myprompt, your_template):
     add_notes_4 = "User question: "
     myprompt_temp = myprompt
     myprompt = add_notes_1 + "\n" + myprompt + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + add_notes_4 + "\n" + myprompt
+    st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出开始")
+    st.write("Current User Query: "+myprompt_temp)
+    st.write("---")
+    st.write("Combined User Input as Prompt:")
+    st.write(myprompt)
+    st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出结束")    
     llm_reply = llm_chain.run(myprompt)
     reply = llm_reply.partition('<|end|>')[0]
     return reply
