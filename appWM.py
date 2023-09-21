@@ -99,7 +99,7 @@ if myprompt := st.chat_input("Enter your question here."):
         st.write("---用户的当前输入问题显示结束---")
         usertext = f"user: {myprompt}"
         #file_name = str(uuid.uuid4()) + ".txt"
-        contexts = writehistory(usertext, file_name)
+        contexts = writehistory(usertext, st.session_state["file_name"])
         st.write("在用户当前输入问题的模块调用writehistory写入聊天历史记录的函数/方法，会打印输出文件名称，并输出此时的user-contexts内容")
 
     with st.chat_message("assistant"):
@@ -118,6 +118,6 @@ if myprompt := st.chat_input("Enter your question here."):
             st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置到这里结束 - 输出结束...")            
             message_placeholder.markdown(full_response)   #这个是不是用来显示assistant的方法？？？
             asstext = f"assistant: {full_response}"            
-            contexts = writehistory(asstext, file_name)
+            contexts = writehistory(asstext, st.session_state["file_name"])
             st.write("在assistant当前回复的模块调用writehistory写入聊天历史记录的函数/方法，也会打印输出文件名称，并输出此时的assitant-contexts内容")            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
