@@ -11,6 +11,8 @@ import requests# Internal usage
 import os
 from dotenv import load_dotenv
 from time import sleep
+import uuid
+import sys
 #from hugchat import hugchat
 #from hugchat.login import Login
 from streamlit_extras.colored_header import colored_header
@@ -93,7 +95,10 @@ def starchat(model,myprompt, your_template):
 #    f.close()
 
 def writehistory(text):
-    with open('chathistory.txt', 'a+') as f:
+# 生成一个随机的文件名
+    file_name = str(uuid.uuid4()) + ".txt"
+    st.write("随机生成的文件名称："+file_name)
+    with open('file_name', 'a+') as f:
         f.write(text)
         f.write('\n')
         f.seek(0)  # 将文件指针移动到文件开头
@@ -137,7 +142,7 @@ if myprompt := st.chat_input("Enter your question here."):
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):            
-            st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出开始---")
+            st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置从这里开始 - 输出开始...")
             message_placeholder = st.empty()   #这里是assistant的本次/当前回复结果显示位置
             full_response = ""
             res = starchat(
@@ -148,11 +153,11 @@ if myprompt := st.chat_input("Enter your question here."):
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)                        
-            st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出结束---")            
+            st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置到这里结束 - 输出结束...")            
             message_placeholder.markdown(full_response)   #这个是不是用来显示assistant的方法？？？
             asstext = f"assistant: {full_response}"            
 #            writehistory(asstext)
 #新增如下一行        
             contexts = writehistory(asstext)   #这里会将当前/本次的AI回复内容追加到contexts末尾
-            st.write("st.chat_message的assistant之contexts（这里会将当前/本次的AI回复内容追加到contexts末尾）: "+contexts)
+            #st.write("st.chat_message的assistant之contexts（这里会将当前/本次的AI回复内容追加到contexts末尾）: "+contexts)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
