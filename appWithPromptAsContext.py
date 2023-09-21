@@ -149,7 +149,7 @@ if myprompt := st.chat_input("Enter your question here."):
             st.write("assistant的回复结果: "+full_response)
             st.write("用st.write方法打印输出assistant的回复结果结束")
             st.write("---")
-            message_placeholder.markdown(full_response)
+            #message_placeholder.markdown(full_response)   这个是不是用来显示assistant的方法？？？
             #st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
             #st.write("Current User Query: "+myprompt_temp)
             #st.write("---")
