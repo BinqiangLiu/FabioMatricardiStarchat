@@ -138,12 +138,12 @@ if myprompt := st.chat_input("Enter your question here."):
         st.write("---用户的当前输入问题显示开始---")
         st.markdown(myprompt)
         st.write("---用户的当前输入问题显示结束---")
-        usertext = f"user: {myprompt}"
-#这里其实有一个小问题，就是每次会将最新的（当前的）用户提问追加到聊天历史记录中，可能并不合适，因为对于下面马上要执行的starchat函数中，这个其实并不能够算是历史记录！
-#如何控制只提取之前的用户输入问题呢？        
+        usertext = f"user: {myprompt}"      
 #        writehistory(usertext)
 #新增如下一行        
         contexts = writehistory(usertext)   #这里会将当前/本次的最新用户输入追加到contexts的末尾
+#这里其实有一个小问题，就是每次会将最新的（当前的）用户提问追加到聊天历史记录中，可能并不合适，因为对于下面马上要执行的starchat函数中，这个其实并不能够算是历史记录！
+#如何控制只提取之前的用户输入问题呢？         
         st.write("在用户当前输入问题的模块调用writehistory写入聊天历史记录的函数/方法，会打印输出文件名称，并输出此时的user-contexts内容")
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
