@@ -130,6 +130,7 @@ if myprompt := st.chat_input("Enter your question here."):
 #        writehistory(usertext)
 #新增如下一行        
         contexts = writehistory(usertext)
+        st.write("st.chat_message的user之contexts: "+contexts)
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):
@@ -161,4 +162,5 @@ if myprompt := st.chat_input("Enter your question here."):
 #            writehistory(asstext)
 #新增如下一行        
             contexts = writehistory(asstext)
+            st.write("st.chat_message的assistant之contexts: "+contexts)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
