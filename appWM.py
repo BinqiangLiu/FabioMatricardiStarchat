@@ -65,7 +65,7 @@ def starchat(model, myprompt, your_template):
 
 def write_history(text):    
     #st.write("随机生成的文件名称：" + file_name)
-    with open(file_name, 'a+') as f:
+    with open(st.session_state["file_name"], 'a+') as f:
         f.write(text)
         f.write('\n')
         f.seek(0)  # 将文件指针移动到文件开头
