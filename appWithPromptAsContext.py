@@ -145,6 +145,8 @@ if myprompt := st.chat_input("Enter your question here."):
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)            
+            st.write("用st.write方法打印输出assistant的回复结果"+full_response)
+            st.write("---")
             message_placeholder.markdown(full_response)
             #st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
             #st.write("Current User Query: "+myprompt_temp)
