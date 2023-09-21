@@ -149,6 +149,7 @@ if myprompt := st.chat_input("Enter your question here."):
             st.write(myprompt)
             st.write("---在with st.chat_message( - assistant - )内的信息打印输出结束")
             asstext = f"assistant: {full_response}"
+            st.write("---AI Assistant的回复信息打印输出位置---")
 #            writehistory(asstext)
 #新增如下一行        
             contexts = writehistory(asstext)
