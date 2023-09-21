@@ -1,3 +1,6 @@
+#关于用户信息串扰的问题解决了！原来好简单，只要把用于存储聊天历史记录的文件放到st.session_state，同时将其命名为一个随机的名称，避免不同用户之间的文件名相同导致不可预测的问题！
+#KEY CODE: if "file_name" not in st.session_state: st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"
+#其他的似乎都不需要修改？ChatGPT给出的代码中，对writehistory函数进行了修改，但是它没有考虑到将聊天历史记录存储文件放到st.session_state，从而仍然有问题！
 
 from pathlib import Path
 import streamlit as st
