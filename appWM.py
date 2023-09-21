@@ -104,6 +104,8 @@ if myprompt := st.chat_input("Enter your question here."):
         usertext = f"user: {myprompt}"
         #file_name = str(uuid.uuid4()) + ".txt"
         contexts = writehistory(usertext, st.session_state["file_name"])
+#这里其实有一个小问题，就是每次会将最新的（当前的）用户提问追加到聊天历史记录中，可能并不合适，因为对于下面马上要执行的starchat函数中，这个其实并不能够算是历史记录！
+#如何控制只提取之前的用户输入问题呢？                
         st.write("在用户当前输入问题的模块调用writehistory写入聊天历史记录的函数/方法，会打印输出文件名称，并输出此时的user-contexts内容")
 
     with st.chat_message("assistant"):
