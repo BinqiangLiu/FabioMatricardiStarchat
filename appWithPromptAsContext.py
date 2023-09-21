@@ -139,11 +139,12 @@ if myprompt := st.chat_input("Enter your question here."):
                   st.session_state["hf_model"],
                   myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
             response = res.split(" ")
+            st.write("---assistant的回复结果输出开始---")
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)
-            st.write("---assistant的回复结果输出位置---")
+            st.write("---assistant的回复结果输出结束---")
             message_placeholder.markdown(full_response)
             st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
             st.write("Current User Query: "+myprompt_temp)
