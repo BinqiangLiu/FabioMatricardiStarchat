@@ -153,7 +153,8 @@ if myprompt := st.chat_input("Enter your question here."):
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
-                sleep(0.1)            
+                #sleep(0.1)            
+                sleep(5)            
             st.write("用st.write方法打印输出assistant的回复结果开始")
             st.markdown("---用st.markdown方法打印输出assistant的本次/当前回复结果开始---")
             st.write(full_response)
