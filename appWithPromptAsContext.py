@@ -100,6 +100,7 @@ if "file_name" not in st.session_state:
     st.write("随机生成的文件名称："+st.session_state["file_name"])
 
 def writehistory(text):       
+    st.write("随机生成的文件名称："+st.session_state["file_name"])
     with open(st.session_state["file_name"], 'a+') as f:
         f.write(text)
         f.write('\n')
