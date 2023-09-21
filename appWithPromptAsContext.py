@@ -112,15 +112,15 @@ for message in st.session_state.messages:
    if message["role"] == "user":
 #      with st.chat_message(message["role"],avatar=av_us):
       with st.chat_message(message["role"]):
-           st.write("用户输入问题的显示开始")
-           st.markdown(message["content"])
-           st.write("用户输入问题的显示结束")
+           st.write("这里是用户输入的历史信息显示")
+           st.markdown("这里是用户输入的历史信息显示")
+           st.markdown(message["content"])           
    else:
 #       with st.chat_message(message["role"],avatar=av_ass):
        with st.chat_message(message["role"]):
-           st.write("assistant回复内容的显示开始")
-           st.markdown(message["content"])
-           st.write("assistant回复内容的显示结束")
+           st.write("这里是assistant回复的历史信息显示")
+           st.markdown("这里是assistant回复的历史信息显示")
+           st.markdown(message["content"])           
 
 # Accept user input
 if myprompt := st.chat_input("Enter your question here."):
@@ -140,19 +140,22 @@ if myprompt := st.chat_input("Enter your question here."):
         with st.spinner("AI Thinking..."):
             message_placeholder = st.empty()
             full_response = ""
-            st.write("---assistant的回复结果输出开始---")
+            st.write("---assistant的当前回复结果输出开始---")
+            st.markdown("---assistant的当前回复结果markdown输出开始---")
             res = starchat(
                   st.session_state["hf_model"],
                   myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
             response = res.split(" ")
             st.write("---assistant的回复结果输出结束---")
+            st.markdown("---assistant的回复结果markdown输出结束---")
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)            
             st.write("用st.write方法打印输出assistant的回复结果开始")
+            st.markdown("用st.markdown方法打印输出assistant的回复结果开始")
             st.write("assistant的回复结果: "+full_response)
-            st.write("用st.write方法打印输出assistant的回复结果结束")
+            st.markdown("用st.markdown方法打印输出assistant的回复结果结束")
             st.write("---")
             #message_placeholder.markdown(full_response)   这个是不是用来显示assistant的方法？？？
             #st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
