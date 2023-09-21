@@ -141,7 +141,7 @@ if myprompt := st.chat_input("Enter your question here."):
                 sleep(0.1)
             st.write("---")
             message_placeholder.markdown(full_response)
-            st.write("---在with st.chat_message("assistant")内的信息打印输出")
+            st.write("---在with st.chat_message( - assistant - )内的信息打印输出")
             st.write("Current User Query: "+myprompt_temp)
             st.write("---")
             st.write("Combined User Input as Prompt:")
