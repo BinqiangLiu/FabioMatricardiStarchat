@@ -144,8 +144,6 @@ if myprompt := st.chat_input("Enter your question here."):
                   st.session_state["hf_model"],
                   myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
             response = res.split(" ")            
-            st.write("---assistant的回复结果输出结束---")
-            st.markdown("---assistant的回复结果markdown输出结束---")
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
