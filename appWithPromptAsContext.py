@@ -111,6 +111,10 @@ for message in st.session_state.messages:
 #       with st.chat_message(message["role"],avatar=av_ass):
        with st.chat_message(message["role"]):
            st.markdown(message["content"])
+           st.write("Current User Query: "+myprompt_temp)
+           st.write("---")
+           st.write("Combined User Input as Prompt:")
+           st.write(myprompt)    
 
 # Accept user input
 if myprompt := st.chat_input("Enter your question here."):
