@@ -30,10 +30,13 @@ av_ass = '🤖'
 if "hf_model" not in st.session_state:
     st.session_state["hf_model"] = "HuggingFaceH4/starchat-beta"
 
-file_name = str(uuid.uuid4()) + ".txt"
+#file_name = str(uuid.uuid4()) + ".txt"
 
-#if "file_name" not in st.session_state:
-#    file_name = str(uuid.uuid4()) + ".txt"
+if "hf_model" not in st.session_state:
+    st.session_state["hf_model"] = "HuggingFaceH4/starchat-beta"
+
+if "file_name" not in st.session_state:
+   st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"
 
 ### INITIALIZING STARCHAT FUNCTION MODEL
 def starchat(model, myprompt, your_template):
