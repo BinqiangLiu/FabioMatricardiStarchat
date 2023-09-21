@@ -35,6 +35,9 @@ av_ass = '🤖'
 if "hf_model" not in st.session_state:
     st.session_state["hf_model"] = "HuggingFaceH4/starchat-beta"
 
+if "file_name" not in st.session_state:
+    st.session_state["file_name"] = str(uuid.uuid4()) + ".txt"
+
 ### INITIALIZING STARCHAT FUNCTION MODEL
 def starchat(model, myprompt, your_template):
     from langchain import PromptTemplate, LLMChain
@@ -95,7 +98,7 @@ if myprompt := st.chat_input("Enter your question here."):
         st.markdown(myprompt)
         st.write("---用户的当前输入问题显示结束---")
         usertext = f"user: {myprompt}"
-        file_name = str(uuid.uuid4()) + ".txt"
+        #file_name = str(uuid.uuid4()) + ".txt"
         contexts = writehistory(usertext, file_name)
         st.write("在用户当前输入问题的模块调用writehistory写入聊天历史记录的函数/方法，会打印输出文件名称，并输出此时的user-contexts内容")
 
