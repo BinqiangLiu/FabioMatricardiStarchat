@@ -64,7 +64,7 @@ def starchat(model, myprompt, your_template):
     return reply
 
 def write_history(text):    
-    st.write("随机生成的文件名称：" + file_name)
+    #st.write("随机生成的文件名称：" + file_name)
     with open(file_name, 'a+') as f:
         f.write(text)
         f.write('\n')
