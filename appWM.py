@@ -48,7 +48,7 @@ def starchat(model, myprompt, your_template):
     add_notes_3 = "Please consult the above chat history before responding to the user question below.\n"
     add_notes_4 = "User question: "
     myprompt_temp = myprompt
-    myprompt = add_notes_1 + "\n" + myprompt + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + add_notes_4 + "\n" + myprompt
+    myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + add_notes_4 + "\n" + myprompt
     st.write("---在def starchat(model,myprompt, your_template)内的信息打印输出开始")
     st.write("Current User Query: "+myprompt_temp)
     st.write("Combined User Input as Prompt:")
