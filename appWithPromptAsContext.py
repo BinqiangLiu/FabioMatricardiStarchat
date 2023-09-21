@@ -147,9 +147,11 @@ if myprompt := st.chat_input("Enter your question here."):
             st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置从这里开始 - 输出开始...")
             message_placeholder = st.empty()   #这里是assistant的本次/当前回复结果显示位置
             full_response = ""
+            st.write("开始调用starchat函数")
             res = starchat(
                   st.session_state["hf_model"],
                   myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
+            st.write("starchat函数调用结束")
             response = res.split(" ")            
             for r in response:
                 full_response = full_response + r + " "
