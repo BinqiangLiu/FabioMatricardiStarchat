@@ -69,7 +69,9 @@ def starchat(model, myprompt, contexts):
     return reply
 
 # Display chat messages from history on app rerun
-for message in st.session_state.messages:
+if "messages" not in st.session_state:
+  st.session_state.messages = []
+  for message in st.session_state.messages:
     if message["role"] == "user":
         with st.chat_message(message["role"]):
             st.write("这里是用户输入的历史信息显示")
