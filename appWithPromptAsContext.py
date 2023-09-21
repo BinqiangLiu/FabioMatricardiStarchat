@@ -1,4 +1,7 @@
 #Memory in prompt.将过往的对话历史文本内容提取出来并追加累积，然后放入myprompt中作为用户输入的问题（还有一些小的处理，增加一些固定的文字说明）
+#/home/adminuser/venv/lib/python3.10/site-packages/huggingface_hub/utils/_deprecation.py:127: FutureWarning: '__init__' (from 'huggingface_hub.inference_api')
+#is deprecated and will be removed from version '0.19.0'. `InferenceApi` client is deprecated in favor of the more feature-complete `InferenceClient`.
+#Check out this guide to learn how to convert your script to use it: https://huggingface.co/docs/huggingface_hub/guides/inference#legacy-inferenceapi-client.
 from pathlib import Path
 import streamlit as st
 from streamlit_chat import message
@@ -140,14 +143,14 @@ if myprompt := st.chat_input("Enter your question here."):
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)
-            st.write("---")
+            st.write("---assistant的回复结果输出位置---")
             message_placeholder.markdown(full_response)
             st.write("---在with st.chat_message( - assistant - )内的信息打印输出开始")
             st.write("Current User Query: "+myprompt_temp)
             st.write("---")
             st.write("Combined User Input as Prompt:")
             st.write(myprompt)
-            st.write("---在with st.chat_message( - assistant - )内的信息打印输出结束")
+            #st.write("---在with st.chat_message( - assistant - )内的信息打印输出结束") - 位置不对
             asstext = f"assistant: {full_response}"            
 #            writehistory(asstext)
 #新增如下一行        
