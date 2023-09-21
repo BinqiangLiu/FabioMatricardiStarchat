@@ -140,21 +140,22 @@ if myprompt := st.chat_input("Enter your question here."):
         # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):
-            message_placeholder = st.empty()
-            full_response = ""
             st.write("---assistant的当前回复结果输出开始---")
             st.markdown("---assistant的当前回复结果markdown输出开始---")
+            st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出开始---")
+            message_placeholder = st.empty()   #这里是assistant的本次/当前回复结果显示位置
+            full_response = ""
             res = starchat(
                   st.session_state["hf_model"],
                   myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
             response = res.split(" ")
+            st.markdown("---st.markdown方法显示：这里是assistant的本次/当前回复结果显示位置，输出结束---")
             st.write("---assistant的回复结果输出结束---")
             st.markdown("---assistant的回复结果markdown输出结束---")
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
-                #sleep(0.1)            
-                sleep(5)            
+                sleep(0.1)                        
             st.write("用st.write方法打印输出assistant的回复结果开始")
             st.markdown("---用st.markdown方法打印输出assistant的本次/当前回复结果开始---")
             st.write(full_response)
