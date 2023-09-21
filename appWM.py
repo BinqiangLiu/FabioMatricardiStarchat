@@ -1,4 +1,3 @@
-#BY CHATGPT
 from pathlib import Path
 import streamlit as st
 from streamlit_chat import message
@@ -23,33 +22,16 @@ with open(css_file) as f:
 load_dotenv()
 yourHFtoken = "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"
 yourHFtoken = os.getenv("HUGGINGFACEHUB_API_TOKEN")
-repo_id="HuggingFaceH4/starchat-beta"
-myprompt_temp=""
-myprompt=""
+repo_id = "HuggingFaceH4/starchat-beta"
 av_us = '🧑'
 av_ass = '🤖'
+
 # Set a default model
 if "hf_model" not in st.session_state:
     st.session_state["hf_model"] = "HuggingFaceH4/starchat-beta"
 
-if "_user_id" not in st.session_state:
-    st.session_state["_user_id"] = str(uuid.uuid4())
-
-# Initialize chat history
-if "contexts" not in st.session_state:
-    st.session_state["contexts"] = {}
-
-# Function to write user history and retrieve contexts
-def write_history(user_input):
-    user_id = st.session_state["_user_id"]
-    if user_id not in st.session_state["contexts"]:
-        st.session_state["contexts"][user_id] = []
-    st.session_state["contexts"][user_id].append(user_input)
-    contexts = "\n".join(st.session_state["contexts"][user_id])
-    return contexts
-
 ### INITIALIZING STARCHAT FUNCTION MODEL
-def starchat(model, myprompt, contexts):
+def starchat(model, myprompt, your_template):
     from langchain import PromptTemplate, LLMChain
     os.environ["HUGGINGFACEHUB_API_TOKEN"] = yourHFtoken
     llm = HuggingFaceHub(repo_id=repo_id,
@@ -58,7 +40,7 @@ def starchat(model, myprompt, contexts):
                                        "temperature": 0.1,
                                        "top_k": 50,
                                        "top_p": 0.95, "eos_token_id": 49155})
-    template = "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>"
+    template = your_template
     prompt = PromptTemplate(template=template, input_variables=["myprompt"])
     llm_chain = LLMChain(prompt=prompt, llm=llm)
     add_notes_1 = "Beginning of chat history:\n"
@@ -66,15 +48,28 @@ def starchat(model, myprompt, contexts):
     add_notes_3 = "Please consult the above chat history before responding to the user question below.\n"
     add_notes_4 = "User question: "
     myprompt_temp = myprompt
-    myprompt = add_notes_1 + "\n" + contexts + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + add_notes_4 + "\n" + myprompt
+    myprompt = add_notes_1 + "\n" + myprompt + "\n" + add_notes_2 + "\n" + add_notes_3 + "\n" + add_notes_4 + "\n" + myprompt
     llm_reply = llm_chain.run(myprompt)
     reply = llm_reply.partition('<|end|>')[0]
     return reply
 
-# Display chat messages from history on app rerun
+def write_history(text):
+    file_name = str(uuid.uuid4()) + ".txt"
+    st.write("随机生成的文件名称：" + file_name)
+    with open(file_name, 'a+') as f:
+        f.write(text)
+        f.write('\n')
+        f.seek(0)  # 将文件指针移动到文件开头
+        contexts = f.read()
+        st.write("contexts的内容：" + contexts)
+    return contexts
+
+# Initialize chat history
 if "messages" not in st.session_state:
-  st.session_state.messages = []
-  for message in st.session_state.messages:
+    st.session_state.messages = []
+
+# Display chat messages from history on app rerun
+for message in st.session_state.messages:
     if message["role"] == "user":
         with st.chat_message(message["role"]):
             st.write("这里是用户输入的历史信息显示")
@@ -95,18 +90,21 @@ if myprompt := st.chat_input("Enter your question here."):
         st.write("---用户的当前输入问题显示结束---")
         usertext = f"user: {myprompt}"
         contexts = write_history(usertext)
-    # Display assistant response in chat message container
+        # Display assistant response in chat message container
     with st.chat_message("assistant"):
         with st.spinner("AI Thinking..."):
             message_placeholder = st.empty()
             full_response = ""
-            res = starchat(st.session_state["hf_model"], myprompt, contexts)
+            res = starchat(
+                st.session_state["hf_model"],
+                myprompt, "<|system|>\n<|end|>\n<|user|>\n{myprompt}<|end|>\n<|assistant|>")
             response = res.split(" ")
             for r in response:
                 full_response = full_response + r + " "
                 message_placeholder.markdown(full_response + "▌")
                 sleep(0.1)
             st.markdown("st.markdown方法显示：assistant的本次/当前回复结果显示位置到这里结束 - 输出结束...")
+            # message_placeholder.markdown(full_response)
             asstext = f"assistant: {full_response}"
             contexts = write_history(asstext)
             st.session_state.messages.append({"role": "assistant", "content": full_response})
